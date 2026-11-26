@@ -14,4 +14,4 @@ export const MODULES: ModuleItem[] = [
 ];
 
 // Update this as milestones are completed and pushed.
-export const COMPLETED_MILESTONES = [0];
+export const COMPLETED_MILESTONES = [0, 1];

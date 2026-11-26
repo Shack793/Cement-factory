@@ -15,3 +15,21 @@ Each milestone is pushed to GitHub as its own commit(s) when complete.
 | 7 | Distributor portal and delivery | 7, 12 | Portal auth, statements, dispatch, proof of delivery, notifications | Portal UI, order tracking map, statements |
 | 8 | Dashboards, reports, roles, audit | 16, 17 | RBAC, audit trail, exceptions, report endpoints | Executive dashboard, exception center |
 | 9 | Hardening and deployment | 15, 19, 20 | Tests, Docker, CI, edge-server notes | Polish, performance, docs |
+
+## Progress
+
+- [x] M0 Foundation and repo
+- [x] M1 Master data (units and conversions, items, parties, vehicles, drivers; seed data from the PDF; 3D pallet; unit converter)
+- [ ] M2 Stores and stock
+- [ ] M3 Recipes and production
+- [ ] M4 Purchasing and inbound weighbridge
+- [ ] M5 Orders, credit and payments
+- [ ] M6 Outbound weighbridge, gate and loading
+- [ ] M7 Distributor portal and delivery
+- [ ] M8 Dashboards, reports, roles, audit
+- [ ] M9 Hardening and deployment
+
+### API (M1)
+`GET/POST /api/units`, `GET /api/units/convert?from=BAG&to=MT&qty=40`, `GET/POST/PUT/DELETE /api/items`,
+`/api/parties` (+ `PATCH /api/parties/{id}/status?value=ON_HOLD`), `/api/vehicles`, `/api/drivers`.
+Note: backend code could not be compiled in the authoring sandbox (no Maven Central access); run `mvn test` first.
