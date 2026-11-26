@@ -1,5 +1,6 @@
 # Cement Factory System - Milestones
 
+Detailed specs for every milestone, the end-to-end flow and the rule catalogue live in `docs/ROADMAP.md`.
 Source of truth: `Cement_Operations_System_on_iProduction_v0.4.pdf` (section numbers below refer to it).
 Each milestone is pushed to GitHub as its own commit(s) when complete.
 

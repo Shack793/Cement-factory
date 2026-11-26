@@ -1,6 +1,6 @@
 # Agent guide - Cement Factory System
 
-Read this first, then `docs/HANDOFF.md` (status + next task) and `docs/MILESTONES.md` (plan).
+Read this first, then `docs/ROADMAP.md` (the whole project flow, every milestone spec, rule catalogue), `docs/HANDOFF.md` (status + next task) and `docs/MILESTONES.md` (checklist).
 The functional spec is `docs/Cement_Operations_System_on_iProduction_v0.4.pdf`; milestone rows cite its section numbers.
 
 ## Stack and layout

@@ -1,5 +1,7 @@
 # Handoff status
 
+Full project flow, all milestone specs and the business-rule catalogue: **`docs/ROADMAP.md`** (read it before starting a milestone).
+
 Last updated after **M2 (Stores and stock)**.
 
 ## Done
