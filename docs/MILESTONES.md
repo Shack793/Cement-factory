@@ -20,7 +20,7 @@ Each milestone is pushed to GitHub as its own commit(s) when complete.
 
 - [x] M0 Foundation and repo
 - [x] M1 Master data (units and conversions, items, parties, vehicles, drivers; seed data from the PDF; 3D pallet; unit converter)
-- [ ] M2 Stores and stock
+- [x] M2 Stores and stock (8 stores, ledger, lots, adjustments with approval, silo rules, low-stock alerts, data-driven 3D plant)
 - [ ] M3 Recipes and production
 - [ ] M4 Purchasing and inbound weighbridge
 - [ ] M5 Orders, credit and payments
@@ -33,3 +33,7 @@ Each milestone is pushed to GitHub as its own commit(s) when complete.
 `GET/POST /api/units`, `GET /api/units/convert?from=BAG&to=MT&qty=40`, `GET/POST/PUT/DELETE /api/items`,
 `/api/parties` (+ `PATCH /api/parties/{id}/status?value=ON_HOLD`), `/api/vehicles`, `/api/drivers`.
 Note: backend code could not be compiled in the authoring sandbox (no Maven Central access); run `mvn test` first.
+
+### API (M2)
+`GET /api/stores`, `POST /api/stores`, `GET /api/stock/balances|low|movements|adjustments/pending`,
+`POST /api/stock/receipts|issues|transfers|adjustments`, `POST /api/stock/adjustments/{id}/approve|reject`.

@@ -8,7 +8,7 @@ function Silo({ x, z = 0, color, label, base }: { x: number; z?: number; color: 
   const fill = useRef<THREE.Mesh>(null);
   const H = 3.2;
   useFrame(({ clock }) => {
-    const level = Math.min(0.98, Math.max(0.08, base + Math.sin(clock.elapsedTime * 0.6 + x) * 0.06));
+    const level = Math.min(1, Math.max(0.02, base + Math.sin(clock.elapsedTime * 0.6 + x) * 0.012));
     if (fill.current) {
       fill.current.scale.y = level;
       fill.current.position.y = (H * level) / 2 + 0.02;
@@ -37,7 +37,7 @@ function Silo({ x, z = 0, color, label, base }: { x: number; z?: number; color: 
   );
 }
 
-function Warehouse({ position }: { position: [number, number, number] }) {
+function Warehouse({ position, label }: { position: [number, number, number]; label: string }) {
   return (
     <group position={position}>
       <mesh position={[0, 0.9, 0]} castShadow>
@@ -56,7 +56,7 @@ function Warehouse({ position }: { position: [number, number, number] }) {
       ))}
       <Html position={[0, 2.7, 0]} center distanceFactor={9}>
         <div style={{ color: "#e6f1f6", fontSize: 12, background: "rgba(7,16,28,.8)", border: "1px solid rgba(120,190,210,.3)", padding: "2px 8px", borderRadius: 999, whiteSpace: "nowrap" }}>
-          Finished goods
+          {label}
         </div>
       </Html>
     </group>
@@ -120,7 +120,20 @@ function Weighbridge() {
   );
 }
 
-export default function PlantScene() {
+export type SiloView = { label: string; level: number; color: string };
+export type PlantSceneProps = {
+  silos?: SiloView[];
+  /** pile size 0..1 for clinker, gypsum, fly ash */
+  yard?: { clinker: number; gypsum: number; flyash: number };
+  fgLabel?: string;
+};
+const DEFAULT_SILOS: SiloView[] = [
+  { label: "Clinker 1,000 MT", level: 0.7, color: "#8b8f94" },
+  { label: "42.5R 500 MT", level: 0.55, color: "#3ed6ec" },
+  { label: "32.5R 500 MT", level: 0.4, color: "#f5b942" },
+];
+
+export default function PlantScene({ silos = DEFAULT_SILOS, yard = { clinker: 0.8, gypsum: 0.5, flyash: 0.4 }, fgLabel = "Finished goods" }: PlantSceneProps) {
   return (
     <Canvas shadows camera={{ position: [8.5, 6.5, 12], fov: 44 }} dpr={[1, 2]}>
       <color attach="background" args={["#07101c"]} />
@@ -139,13 +152,13 @@ export default function PlantScene() {
         <meshStandardMaterial color="#14283d" />
       </mesh>
 
-      <Silo x={-2.2} z={-1.2} color="#8b8f94" label="Clinker 1,000 MT" base={0.7} />
-      <Silo x={0} z={-1.2} color="#3ed6ec" label="42.5R 500 MT" base={0.55} />
-      <Silo x={2.2} z={-1.2} color="#f5b942" label="32.5R 500 MT" base={0.4} />
-      <Warehouse position={[6.2, 0, -1.2]} />
-      <Pile x={-6} z={-1.5} color="#2a2d31" s={1.3} />
-      <Pile x={-5} z={-0.6} color="#e8e4d8" s={0.9} />
-      <Pile x={-6.4} z={0} color="#9aa3aa" s={0.8} />
+      {silos.map((sv, i) => (
+        <Silo key={sv.label} x={-2.2 + i * 2.2} z={-1.2} color={sv.color} label={sv.label} base={sv.level} />
+      ))}
+      <Warehouse position={[6.2, 0, -1.2]} label={fgLabel} />
+      <Pile x={-6} z={-1.5} color="#2a2d31" s={0.35 + 1.1 * yard.clinker} />
+      <Pile x={-5} z={-0.6} color="#e8e4d8" s={0.3 + 0.9 * yard.gypsum} />
+      <Pile x={-6.4} z={0} color="#9aa3aa" s={0.3 + 0.9 * yard.flyash} />
       <Html position={[-5.6, 1.9, -1]} center distanceFactor={9}>
         <div style={{ color: "#e6f1f6", fontSize: 12, background: "rgba(7,16,28,.8)", border: "1px solid rgba(120,190,210,.3)", padding: "2px 8px", borderRadius: 999, whiteSpace: "nowrap" }}>
           Raw yard

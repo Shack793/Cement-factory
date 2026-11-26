@@ -3,11 +3,13 @@ package com.cementfactory.config;
 import com.cementfactory.model.*;
 import com.cementfactory.repository.*;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 import java.math.BigDecimal;
 
 /** Loads the cement master data described in the PDF on first start (sections 3.2, 3.4, 3.8, 4.1). */
 @Component
+@Order(1)
 public class DataSeeder implements CommandLineRunner {
     private final UnitRepository units;
     private final ItemRepository items;

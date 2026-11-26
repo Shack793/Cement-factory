@@ -26,3 +26,6 @@ cd frontend && npm install && npm run dev  # http://localhost:3000
 ```
 
 See `docs/MILESTONES.md` for the build plan and progress.
+
+## For contributors and AI agents
+Read `AGENTS.md` (conventions) and `docs/HANDOFF.md` (status and next task) before changing code.

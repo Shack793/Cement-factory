@@ -16,3 +16,5 @@ spring:
       enabled: true
 app:
   cors-origins: http://localhost:3000
+  stock:
+    adjustment-approval-kg: 5000
